@@ -1,0 +1,11 @@
+Escuintla SantaLucia 15
+SanPedroLaLaguna SanMarcos 20
+Panajachel Solola 10
+Huehuetenango Chichicastenango 50
+Solola SanPedroLaLaguna 15
+Mixco Antigua 30
+SanMarcos Quetzaltenango 25
+Quetzaltenango Huehuetenango 150
+Chichicastenango Panajachel 30
+Antigua Escuintla 25
+Antigua Quetzaltenango 100
