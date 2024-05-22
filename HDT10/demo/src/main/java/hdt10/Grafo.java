@@ -38,7 +38,7 @@ public class Grafo {
         }
     }
 
-    private int[][] leerMatrizAdyacencia(String nombreArchivo, Map<String, Integer> nodos) throws IOException {
+    public int[][] leerMatrizAdyacencia(String nombreArchivo, Map<String, Integer> nodos) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
         String linea;
         int numNodos = 0;
@@ -82,7 +82,7 @@ public class Grafo {
         return matrizAdyacencia;
     }
 
-    private void floydWarshall(int[][] matrizAdyacencia, Map<String, Integer> nodos, String ciudadOrigen, String ciudadDestino) {
+    public void floydWarshall(int[][] matrizAdyacencia, Map<String, Integer> nodos, String ciudadOrigen, String ciudadDestino) {
         int n = matrizAdyacencia.length;
         int[][] distancias = new int[n][n];
         int[][] siguientes = new int[n][n];
@@ -259,7 +259,7 @@ public class Grafo {
         matrizAdyacencia = nuevaMatriz;
     }
 
-    private void escribirMatrizAdyacencia(String nombreArchivo) {
+    public void escribirMatrizAdyacencia(String nombreArchivo) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo))) {
             for (Map.Entry<String, Integer> entry : nodos.entrySet()) {
                 String ciudad1 = entry.getKey();
@@ -278,7 +278,7 @@ public class Grafo {
         }
     }
 
-    private String getKeyByValue(Map<String, Integer> map, int value) {
+    public String getKeyByValue(Map<String, Integer> map, int value) {
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             if (entry.getValue().equals(value)) {
                 return entry.getKey();
