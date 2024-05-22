@@ -35,8 +35,13 @@ public class Main {
             switch(seleccion){
                 case "1":
                     //calcular la mejor ruta
+                    System.out.print("Ingrese la ciudad de origen: ");
+                    String ciudadOrigen = scanner.nextLine();
+                    System.out.print("Ingrese la ciudad de destino: ");
+                    String ciudadDestino = scanner.nextLine();
+                    
                     System.out.println();
-                    grafo.ejecutarFloydWarshall(nombreArchivo);
+                    grafo.ejecutarFloydWarshall(nombreArchivo, ciudadOrigen, ciudadDestino);
                     System.out.println();
                     break;
 

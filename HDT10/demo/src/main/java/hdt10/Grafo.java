@@ -14,12 +14,25 @@ public class Grafo {
     private static final int INF = Integer.MAX_VALUE;
     private int[][] matrizAdyacencia;
     private Map<String, Integer> nodos;
+    private int distancia;
 
-    public void ejecutarFloydWarshall(String nombreArchivo) {
+    
+
+    public void setDistancia(int distancia) {
+        this.distancia = distancia;
+    }
+
+    public int getDistancia() {
+        return distancia;
+    }
+
+    public void ejecutarFloydWarshall(String nombreArchivo, String ciudadOrigen, String ciudadDestino) {
+        String ciudadO = ciudadOrigen;
+        String ciudadD = ciudadDestino;
         try {
             nodos = new HashMap<>();
             matrizAdyacencia = leerMatrizAdyacencia(nombreArchivo, nodos);
-            floydWarshall(matrizAdyacencia, nodos);
+            floydWarshall(matrizAdyacencia, nodos, ciudadO, ciudadD);
         } catch (IOException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
@@ -69,7 +82,7 @@ public class Grafo {
         return matrizAdyacencia;
     }
 
-    private void floydWarshall(int[][] matrizAdyacencia, Map<String, Integer> nodos) {
+    private void floydWarshall(int[][] matrizAdyacencia, Map<String, Integer> nodos, String ciudadOrigen, String ciudadDestino) {
         int n = matrizAdyacencia.length;
         int[][] distancias = new int[n][n];
         int[][] siguientes = new int[n][n];
@@ -99,13 +112,6 @@ public class Grafo {
             }
         }
 
-        // Solicitar entrada del usuario
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese la ciudad de origen: ");
-        String ciudadOrigen = scanner.nextLine();
-        System.out.print("Ingrese la ciudad de destino: ");
-        String ciudadDestino = scanner.nextLine();
-
         if (!nodos.containsKey(ciudadOrigen) || !nodos.containsKey(ciudadDestino)) {
             System.out.println("Una o ambas ciudades no existen en el grafo.");
             return;
@@ -119,6 +125,7 @@ public class Grafo {
         } else {
             System.out.println("El camino más corto desde " + ciudadOrigen + " hasta " + ciudadDestino + " es:");
             System.out.println("Distancia: " + distancias[origen][destino] + " km");
+            distancia = distancias[origen][destino];
             System.out.print("Ruta: " + ciudadOrigen);
             int siguiente = siguientes[origen][destino];
             while (siguiente != -1) {
@@ -180,6 +187,13 @@ public class Grafo {
     }
 
     public void eliminarConexion(String nombreArchivo, String ciudadOrigen, String ciudadDestino) {
+        try {
+            nodos = new HashMap<>();
+            matrizAdyacencia = leerMatrizAdyacencia(nombreArchivo, nodos);
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+
         if (!nodos.containsKey(ciudadOrigen) || !nodos.containsKey(ciudadDestino)) {
             System.out.println("Una o ambas ciudades no existen en el grafo.");
             return;
@@ -194,10 +208,18 @@ public class Grafo {
             matrizAdyacencia[origen][destino] = INF;
             System.out.println("Conexión entre " + ciudadOrigen + " y " + ciudadDestino + " eliminada.");
             escribirMatrizAdyacencia(nombreArchivo);
+            setDistancia(0);
         }
     }
 
     public void agregarConexion(String nombreArchivo, String ciudadOrigen, String ciudadDestino, int peso) {
+        try {
+            nodos = new HashMap<>();
+            matrizAdyacencia = leerMatrizAdyacencia(nombreArchivo, nodos);
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+
         if (!nodos.containsKey(ciudadOrigen)) {
             nodos.put(ciudadOrigen, nodos.size());
             expandirMatrizAdyacencia();
@@ -216,6 +238,7 @@ public class Grafo {
             matrizAdyacencia[origen][destino] = peso;
             System.out.println("Conexión entre " + ciudadOrigen + " y " + ciudadDestino + " agregada con un peso de " + peso + ".");
             escribirMatrizAdyacencia(nombreArchivo);
+            setDistancia(peso);
         }
     }
 
@@ -263,4 +286,16 @@ public class Grafo {
         }
         return null;
     }
+    public int[][] getMatrizAdyacencia() {
+        return matrizAdyacencia;
+    }
+    
+    public Map<String, Integer> getNodos() {
+        return nodos;
+    }
+
+    public static int getInf() {
+        return INF;
+    }
+    
 }
