@@ -9,7 +9,7 @@ def leer_grafo(archivo):
             G.add_edge(ciudad1, ciudad2, weight=int(distancia))
     return G
 
-grafo = leer_grafo('Programa_Python\guategrafo.txt')
+grafo = leer_grafo('Programa_Python\guategrafoPyhon.txt')
 
 def encontrar_centro_grafo(G):
     distancias = dict(nx.floyd_warshall(G))
@@ -76,7 +76,7 @@ def interfaz_usuario(grafo):
             centro = encontrar_centro_grafo(grafo)
             print("El centro del grafo es:", centro)
         elif opcion == '3':
-            modificar_grafo(grafo, "guategrafo.txt")
+            modificar_grafo(grafo, "Programa_Python\guategrafoPyhon.txt")
         elif opcion == '4':
             print("Que tenga un buen día querido usuario!!!")
             break

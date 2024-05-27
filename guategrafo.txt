@@ -9,6 +9,3 @@ Antigua Quetzaltenango 100
 SanPedroLaLaguna SanMarcos 20
 Huehuetenango Chichicastenango 50
 Quetzaltenango Huehuetenango 150
-
-
-
